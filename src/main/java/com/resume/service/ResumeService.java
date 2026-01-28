@@ -1,8 +1,10 @@
 package com.resume.service;
 
-
-import com.resume.dto.ResumeRequest;
+import com.resume.dto.*;
 
 public interface ResumeService {
-    String generateResume(ResumeRequest resumeRequest);
+
+    ResumeDraftResponse analyzeSummary(SummaryRequest request);
+
+    String generateFinalResume(FinalResumeRequest request);
 }

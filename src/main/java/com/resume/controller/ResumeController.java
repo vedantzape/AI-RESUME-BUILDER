@@ -1,11 +1,9 @@
 package com.resume.controller;
 
-
-import com.resume.dto.ResumeRequest;
+import com.resume.dto.*;
 import com.resume.service.ResumeService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-
 
 @RestController
 @RequestMapping("/api/resume")
@@ -18,14 +16,15 @@ public class ResumeController {
         this.resumeService = resumeService;
     }
 
+    // STEP 1
+    @PostMapping("/analyze")
+    public ResumeDraftResponse analyze(@Valid @RequestBody SummaryRequest request) {
+        return resumeService.analyzeSummary(request);
+    }
+
+    // STEP 2
     @PostMapping("/generate")
-    public String generate(@Valid @RequestBody ResumeRequest resumeRequest) {
-        return resumeService.generateResume(resumeRequest);
+    public String generate(@Valid @RequestBody FinalResumeRequest request) {
+        return resumeService.generateFinalResume(request);
     }
-
-    @GetMapping("/test")
-    public String test() {
-        return "Controller working";
-    }
-
 }
